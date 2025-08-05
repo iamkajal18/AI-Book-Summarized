@@ -1,4 +1,4 @@
-// File: C:\Users\kasau\OneDrive\Desktop\Book-Summary\src\app\api\(blog)\get-idea\route.ts
+// File: C:\Users\kasau\OneDrive\Desktop\Book-Summary\AI-Book-Summarized\src\app\api\(blog)\get-idea\route.ts
 import * as entry from '../../../../../../src/app/api/(blog)/get-idea/route.js'
 import type { NextRequest } from 'next/server.js'
 

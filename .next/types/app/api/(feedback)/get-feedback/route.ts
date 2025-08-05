@@ -1,4 +1,4 @@
-// File: C:\Users\kasau\OneDrive\Desktop\Book-Summary\src\app\api\(feedback)\get-feedback\route.ts
+// File: C:\Users\kasau\OneDrive\Desktop\Book-Summary\AI-Book-Summarized\src\app\api\(feedback)\get-feedback\route.ts
 import * as entry from '../../../../../../src/app/api/(feedback)/get-feedback/route.js'
 import type { NextRequest } from 'next/server.js'
 

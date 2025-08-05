@@ -1,4 +1,4 @@
-// File: C:\Users\kasau\OneDrive\Desktop\Book-Summary\src\app\page.tsx
+// File: C:\Users\kasau\OneDrive\Desktop\Book-Summary\AI-Book-Summarized\src\app\page.tsx
 import * as entry from '../../../src/app/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
