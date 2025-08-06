@@ -5,9 +5,8 @@ import Testimonial from "@/components/Testimonial";
 import Faq from "@/components/Faq";
 import AnimatedBookSummaries from "@/components/NavAnimatedBookSummaries";
 import HeroSection from "@/components/HeroSection";
-
-import DiscussionPanel from "@/components/DiscussionPanel"
-import AllBlogs from "@/components/AllBlogs";
+import Summaries from "@/components/summaries"
+import DiscussionPanel from "@/components/DiscussionPanel";
 
 
 export default function Page() {
@@ -20,7 +19,7 @@ export default function Page() {
     <HeroSection />
    <DiscussionPanel/>
       <AnimatedBookSummaries/>
-      <AllBlogs/>
+      <Summaries/>
      <Testimonial />
      <Faq />
    
