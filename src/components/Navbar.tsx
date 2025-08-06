@@ -180,9 +180,10 @@ const Navbar: React.FC = () => {
       {/* Brand Name */}
       <div className="flex items-center">
          <span className="text-2xl font-bold tracking-tight">
-          <span className="bg-gradient-to-r from-blue-600 to-purple-800 dark:from-purple-300 dark:to-purple-500 bg-clip-text text-transparent transition-all duration-300">
-            Smart
-          </span>
+          <span className="bg-gradient-to-r from-teal-700 via-blue-600 to-purple-700 dark:from-purple-300 dark:via-purple-400 dark:to-purple-500 bg-clip-text text-transparent transition-all duration-300">
+  Smart
+</span>
+
           <span className="text-gray-900 dark:text-white ml-1 transition-colors duration-300">
             Briefs
           </span>
