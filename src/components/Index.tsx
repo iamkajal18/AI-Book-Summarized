@@ -257,7 +257,7 @@ export default function Home() {
       </header>
       <main className="pt-20">
         <HeroSection theme={theme || 'light'} />
-        <HeroSection />
+
       </main>
     </div>
   );

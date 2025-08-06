@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { BookOpen, Sparkles } from "lucide-react";
+import { BookOpen, Sparkles, Users } from "lucide-react";
 
 interface Book {
   id: number;

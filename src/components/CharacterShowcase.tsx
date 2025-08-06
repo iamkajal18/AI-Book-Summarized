@@ -1,8 +1,14 @@
-import type { CharacterDef } from "@/components/AnimatedBookSummaries";
+import CharacterDef from "@/components/AnimatedBookSummaries";
 
+
+interface Character {
+  name: string;
+  traits: string;
+  defaultEmotion: string;
+}
 
 interface CharacterShowcaseProps {
-  characters: CharacterDef[];
+  characters: Character[];
   theme: string;
 }
 

@@ -246,7 +246,7 @@ export default function AnimatedBookSummaries() {
           />
         )}
         
-        {isLoading && <LoadingOverlay currentStep={currentStep} />}
+        {isLoading && <LoadingOverlay currentStep={currentStep} theme="default" />}
       </main>
     </div>
   );
