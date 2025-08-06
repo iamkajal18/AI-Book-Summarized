@@ -5,7 +5,7 @@ import Testimonial from "@/components/Testimonial";
 import Faq from "@/components/Faq";
 import AnimatedBookSummaries from "@/components/NavAnimatedBookSummaries";
 import HeroSection from "@/components/HeroSection";
-import Summaries from "@/components/summaries"
+import Summaries from "@/components/Summaries"
 import DiscussionPanel from "@/components/DiscussionPanel";
 
 
