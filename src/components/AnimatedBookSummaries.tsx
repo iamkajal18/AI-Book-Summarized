@@ -220,7 +220,7 @@ export default function AnimatedBookSummaries() {
         ? "bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white" 
         : "bg-gradient-to-br from-indigo-50 via-white to-purple-50 text-gray-900"
     }`}>
-      <HeroSection theme={theme} />
+      
       
       <div className="relative container mx-auto px-6 pt-16 pb-24">
         <CharacterShowcase characters={characters} theme={theme} />
