@@ -1,10 +1,9 @@
-import Summaries from '@/components/summaries'
 import React from 'react'
-
+import Books from "@/components/Books"
 function page() {
   return (
     <div>
-      <Summaries/>
+      <Books/>
     </div>
   )
 }
