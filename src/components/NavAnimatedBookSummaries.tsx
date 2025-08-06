@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Book, Users, Sparkles, BookOpen } from "lucide-react";
+import { useTheme } from "./ThemeContext";
 import BookInput from "@/app/components/BookInput";
 import DialogueViewer from "@/app/components/DialogueViewer";
 import LoadingOverlay from "@/components/LoadingOverlay";
@@ -28,6 +29,7 @@ interface DialogueLine {
 type AppStep = "input" | "summary" | "dialogue" | "video";
 
 export default function AnimatedBookSummaries() {
+  const { theme } = useTheme();
   const [summary, setSummary] = useState<string>("");
   const [dialogue, setDialogue] = useState<DialogueLine[]>([]);
   const [videoIds, setVideoIds] = useState<string[]>([]);
@@ -211,7 +213,11 @@ export default function AnimatedBookSummaries() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50">
+    <div className={`min-h-screen transition-colors duration-300 ${
+      theme === "dark"
+        ? "bg-gradient-to-br from-gray-900/50 to-gray-800/50"
+        : "bg-gradient-to-br from-indigo-50 via-white to-purple-50"
+    }`}>
       <div className="relative container mx-auto px-6 pt-16 pb-24">
         {/* Placeholder for any additional content */}
       </div>
@@ -220,8 +226,10 @@ export default function AnimatedBookSummaries() {
         {warnings.length > 0 && <WarningDisplay warnings={warnings} onDismiss={() => setWarnings([])} />}
         
         {currentStep === "input" && (
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-100 p-8">
-            <BookInput onSubmit={handleBookSubmit} disabled={isLoading} theme="default" />
+          <div className={`bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl shadow-lg border transition-colors duration-300 ${
+            theme === "dark" ? "border-gray-700" : "border-gray-100"
+          } p-8`}>
+            <BookInput onSubmit={handleBookSubmit} disabled={isLoading} theme={theme} />
           </div>
         )}
         
@@ -246,7 +254,7 @@ export default function AnimatedBookSummaries() {
           />
         )}
         
-        {isLoading && <LoadingOverlay currentStep={currentStep} theme="default" />}
+        {isLoading && <LoadingOverlay currentStep={currentStep} theme={theme} />}
       </main>
     </div>
   );
@@ -265,21 +273,41 @@ function SummaryStep({
   onGenerate: () => void;
   isLoading: boolean;
 }) {
+  const { theme } = useTheme();
+
   return (
-    <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-100 p-8">
+    <div className={`bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl shadow-lg border transition-colors duration-300 ${
+      theme === "dark" ? "border-gray-700" : "border-gray-100"
+    } p-8`}>
       <div className="text-center mb-6">
-        <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-blue-600 rounded-xl flex items-center justify-center text-white mx-auto mb-3">
+        <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-white mx-auto mb-3 transition-colors duration-300 ${
+          theme === "dark" ? "bg-gradient-to-br from-green-600 to-blue-700" : "bg-gradient-to-br from-green-500 to-blue-600"
+        }`}>
           <BookOpen className="w-6 h-6" />
         </div>
-        <h2 className="text-2xl font-semibold text-gray-800">Summary of "{bookTitle}"</h2>
+        <h2 className={`text-2xl font-semibold transition-colors duration-300 ${
+          theme === "dark" ? "text-gray-200" : "text-gray-800"
+        }`}>
+          Summary of "{bookTitle}"
+        </h2>
       </div>
-      <div className="bg-gray-50 rounded-xl p-6 mb-8 border border-gray-200">
-        <p className="text-gray-700 whitespace-pre-line leading-relaxed">{summary}</p>
+      <div className={`rounded-xl p-6 mb-8 border transition-colors duration-300 ${
+        theme === "dark" ? "bg-gray-900 border-gray-700" : "bg-gray-50 border-gray-200"
+      }`}>
+        <p className={`whitespace-pre-line leading-relaxed transition-colors duration-300 ${
+          theme === "dark" ? "text-gray-300" : "text-gray-700"
+        }`}>
+          {summary}
+        </p>
       </div>
       <div className="flex flex-col sm:flex-row gap-4 justify-center">
         <button
           onClick={onBack}
-          className="px-6 py-3 bg-gray-100 text-gray-700 rounded-xl hover:bg-gray-200 transition-all font-medium"
+          className={`px-6 py-3 rounded-xl transition-all font-medium transition-colors duration-300 ${
+            theme === "dark"
+              ? "bg-gray-700 text-gray-200 hover:bg-gray-600"
+              : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+          }`}
           disabled={isLoading}
         >
           Start Over
@@ -287,7 +315,11 @@ function SummaryStep({
         <button
           onClick={onGenerate}
           disabled={isLoading}
-          className="px-8 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl hover:from-indigo-700 hover:to-purple-700 transform hover:scale-105 transition-all duration-200 font-medium flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+          className={`px-8 py-3 rounded-xl transform transition-all duration-200 font-medium flex items-center justify-center gap-2 ${
+            theme === "dark"
+              ? "bg-gradient-to-r from-indigo-500 to-purple-500 text-white hover:from-indigo-600 hover:to-purple-600 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+              : "bg-gradient-to-r from-indigo-600 to-purple-600 text-white hover:from-indigo-700 hover:to-purple-700 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+          }`}
         >
           {isLoading ? (
             <>
@@ -321,13 +353,23 @@ function DialogueStep({
   onBack: () => void;
   onReset: () => void;
 }) {
+  const { theme } = useTheme();
+
   return (
-    <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-100 p-8">
+    <div className={`bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl shadow-lg border transition-colors duration-300 ${
+      theme === "dark" ? "border-gray-700" : "border-gray-100"
+    } p-8`}>
       <div className="text-center mb-8">
-        <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-xl flex items-center justify-center text-white mx-auto mb-3">
+        <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-white mx-auto mb-3 transition-colors duration-300 ${
+          theme === "dark" ? "bg-gradient-to-br from-purple-600 to-indigo-700" : "bg-gradient-to-br from-purple-500 to-indigo-600"
+        }`}>
           <Users className="w-6 h-6" />
         </div>
-        <h2 className="text-2xl font-semibold text-gray-800">Character Discussion: "{bookTitle}"</h2>
+        <h2 className={`text-2xl font-semibold transition-colors duration-300 ${
+          theme === "dark" ? "text-gray-200" : "text-gray-800"
+        }`}>
+          Character Discussion: "{bookTitle}"
+        </h2>
       </div>
       <DialogueViewer
         dialogue={dialogue.map((line, index) => ({
@@ -349,13 +391,21 @@ function DialogueStep({
       <div className="flex flex-col sm:flex-row gap-4 mt-8 justify-center">
         <button
           onClick={onBack}
-          className="px-6 py-3 bg-gray-100 text-gray-700 rounded-xl hover:bg-gray-200 transition-all font-medium"
+          className={`px-6 py-3 rounded-xl transition-all font-medium transition-colors duration-300 ${
+            theme === "dark"
+              ? "bg-gray-700 text-gray-200 hover:bg-gray-600"
+              : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+          }`}
         >
           Back to Summary
         </button>
         <button
           onClick={onReset}
-          className="px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl hover:from-indigo-700 hover:to-purple-700 transition-all font-medium"
+          className={`px-6 py-3 rounded-xl transition-all font-medium transition-colors duration-300 ${
+            theme === "dark"
+              ? "bg-gradient-to-r from-indigo-500 to-purple-500 text-white hover:from-indigo-600 hover:to-purple-600"
+              : "bg-gradient-to-r from-indigo-600 to-purple-600 text-white hover:from-indigo-700 hover:to-purple-700"
+          }`}
         >
           Start New Book
         </button>

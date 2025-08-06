@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { BookOpen, Sparkles, Users } from "lucide-react";
+import { useTheme } from "./ThemeContext";
 
 interface Book {
   id: number;
@@ -74,6 +75,7 @@ const characters: CharacterDef[] = [
 ];
 
 export default function Summaries() {
+  const { theme } = useTheme();
   const [sortBy, setSortBy] = useState("title");
   const [filterCategory, setFilterCategory] = useState("all");
   const [summary, setSummary] = useState<string>("");
@@ -243,30 +245,54 @@ export default function Summaries() {
   };
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-6">Book Summaries</h1>
+    <div className={`container mx-auto p-4 min-h-screen transition-colors duration-300 ${
+      theme === "dark"
+        ? "bg-gradient-to-br from-gray-900/50 to-gray-800/50"
+        : "bg-gradient-to-br from-indigo-50 via-white to-purple-50"
+    }`}>
+      <h1 className={`text-3xl font-bold mb-6 transition-colors duration-300 ${
+        theme === "dark" ? "text-gray-200" : "text-gray-800"
+      }`}>
+        Book Summaries
+      </h1>
 
       {currentStep === "input" && (
         <>
           {/* Filter and Sort Controls */}
           <div className="mb-6 flex flex-col md:flex-row gap-4">
             <div>
-              <label className="mr-2">Sort by:</label>
+              <label className={`mr-2 transition-colors duration-300 ${
+                theme === "dark" ? "text-gray-300" : "text-gray-700"
+              }`}>
+                Sort by:
+              </label>
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="p-2 border rounded"
+                className={`p-2 border rounded transition-colors duration-300 ${
+                  theme === "dark"
+                    ? "bg-gray-800 border-gray-700 text-gray-200"
+                    : "bg-white border-gray-300 text-gray-800"
+                }`}
               >
                 <option value="title">Title</option>
                 <option value="author">Author</option>
               </select>
             </div>
             <div>
-              <label className="mr-2">Filter by category:</label>
+              <label className={`mr-2 transition-colors duration-300 ${
+                theme === "dark" ? "text-gray-300" : "text-gray-700"
+              }`}>
+                Filter by category:
+              </label>
               <select
                 value={filterCategory}
                 onChange={(e) => setFilterCategory(e.target.value)}
-                className="p-2 border rounded"
+                className={`p-2 border rounded transition-colors duration-300 ${
+                  theme === "dark"
+                    ? "bg-gray-800 border-gray-700 text-gray-200"
+                    : "bg-white border-gray-300 text-gray-800"
+                }`}
               >
                 <option value="all">All</option>
                 <option value="Fiction">Fiction</option>
@@ -281,13 +307,36 @@ export default function Summaries() {
           {/* Book Summaries List */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredBooks.map((book) => (
-              <div key={book.id} className="bg-white p-4 rounded-lg shadow hover:shadow-lg transition">
-                <h2 className="text-xl font-semibold">{book.title}</h2>
-                <p className="text-gray-600">by {book.author}</p>
-                <p className="text-gray-500 mt-2">{book.summary}</p>
+              <div
+                key={book.id}
+                className={`p-4 rounded-lg shadow hover:shadow-lg transition-colors duration-300 ${
+                  theme === "dark"
+                    ? "bg-gray-800 border-gray-700"
+                    : "bg-white border-gray-100"
+                }`}
+              >
+                <h2 className={`text-xl font-semibold transition-colors duration-300 ${
+                  theme === "dark" ? "text-gray-200" : "text-gray-800"
+                }`}>
+                  {book.title}
+                </h2>
+                <p className={`transition-colors duration-300 ${
+                  theme === "dark" ? "text-gray-300" : "text-gray-600"
+                }`}>
+                  by {book.author}
+                </p>
+                <p className={`mt-2 transition-colors duration-300 ${
+                  theme === "dark" ? "text-gray-400" : "text-gray-500"
+                }`}>
+                  {book.summary}
+                </p>
                 <button
                   onClick={() => handleBookSubmit(book.title, book.author)}
-                  className="text-blue-600 hover:underline mt-2 inline-block"
+                  className={`transition-colors duration-300 ${
+                    theme === "dark"
+                      ? "text-indigo-400 hover:text-indigo-300"
+                      : "text-blue-600 hover:text-blue-500"
+                  } mt-2 inline-block hover:underline`}
                   disabled={isLoading}
                 >
                   Read More
@@ -299,22 +348,40 @@ export default function Summaries() {
       )}
 
       {currentStep === "summary" && (
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-100 p-8">
+        <div className={`bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl shadow-lg border transition-colors duration-300 ${
+          theme === "dark" ? "border-gray-700" : "border-gray-100"
+        } p-8`}>
           <div className="text-center mb-6">
-            <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-blue-600 rounded-xl flex items-center justify-center text-white mx-auto mb-3">
+            <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-white mx-auto mb-3 transition-colors duration-300 ${
+              theme === "dark" ? "bg-gradient-to-br from-green-600 to-blue-700" : "bg-gradient-to-br from-green-500 to-blue-600"
+            }`}>
               <BookOpen className="w-6 h-6" />
             </div>
-            <h2 className="text-2xl font-semibold text-gray-800">Summary of "{bookTitle}"</h2>
+            <h2 className={`text-2xl font-semibold transition-colors duration-300 ${
+              theme === "dark" ? "text-gray-200" : "text-gray-800"
+            }`}>
+              Summary of "{bookTitle}"
+            </h2>
           </div>
 
-          <div className="bg-gray-50 rounded-xl p-6 mb-8 border border-gray-200">
-            <p className="text-gray-700 whitespace-pre-line leading-relaxed">{summary}</p>
+          <div className={`rounded-xl p-6 mb-8 border transition-colors duration-300 ${
+            theme === "dark" ? "bg-gray-900 border-gray-700" : "bg-gray-50 border-gray-200"
+          }`}>
+            <p className={`whitespace-pre-line leading-relaxed transition-colors duration-300 ${
+              theme === "dark" ? "text-gray-300" : "text-gray-700"
+            }`}>
+              {summary}
+            </p>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
               onClick={resetApp}
-              className="px-6 py-3 bg-gray-100 text-gray-700 rounded-xl hover:bg-gray-200 transition-all font-medium"
+              className={`px-6 py-3 rounded-xl transition-all font-medium transition-colors duration-300 ${
+                theme === "dark"
+                  ? "bg-gray-700 text-gray-200 hover:bg-gray-600"
+                  : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+              }`}
               disabled={isLoading}
             >
               Start Over
@@ -322,7 +389,11 @@ export default function Summaries() {
             <button
               onClick={generateDialogue}
               disabled={isLoading}
-              className="px-8 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl hover:from-indigo-700 hover:to-purple-700 transform hover:scale-105 transition-all duration-200 font-medium flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+              className={`px-8 py-3 rounded-xl transform transition-all duration-200 font-medium flex items-center justify-center gap-2 ${
+                theme === "dark"
+                  ? "bg-gradient-to-r from-indigo-500 to-purple-500 text-white hover:from-indigo-600 hover:to-purple-600 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                  : "bg-gradient-to-r from-indigo-600 to-purple-600 text-white hover:from-indigo-700 hover:to-purple-700 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+              }`}
             >
               {isLoading ? (
                 <>
@@ -341,12 +412,20 @@ export default function Summaries() {
       )}
 
       {(currentStep === "dialogue" || currentStep === "video") && (
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-100 p-8">
+        <div className={`bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl shadow-lg border transition-colors duration-300 ${
+          theme === "dark" ? "border-gray-700" : "border-gray-100"
+        } p-8`}>
           <div className="text-center mb-8">
-            <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-xl flex items-center justify-center text-white mx-auto mb-3">
+            <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-white mx-auto mb-3 transition-colors duration-300 ${
+              theme === "dark" ? "bg-gradient-to-br from-purple-600 to-indigo-700" : "bg-gradient-to-br from-purple-500 to-indigo-600"
+            }`}>
               <Users className="w-6 h-6" />
             </div>
-            <h2 className="text-2xl font-semibold text-gray-800">Character Discussion: "{bookTitle}"</h2>
+            <h2 className={`text-2xl font-semibold transition-colors duration-300 ${
+              theme === "dark" ? "text-gray-200" : "text-gray-800"
+            }`}>
+              Character Discussion: "{bookTitle}"
+            </h2>
           </div>
 
           {/* Note: DialogueViewer component is not included in the provided code, so it will need to be imported or implemented */}
@@ -368,13 +447,21 @@ export default function Summaries() {
           <div className="flex flex-col sm:flex-row gap-4 mt-8 justify-center">
             <button
               onClick={() => setCurrentStep("summary")}
-              className="px-6 py-3 bg-gray-100 text-gray-700 rounded-xl hover:bg-gray-200 transition-all font-medium"
+              className={`px-6 py-3 rounded-xl transition-all font-medium transition-colors duration-300 ${
+                theme === "dark"
+                  ? "bg-gray-700 text-gray-200 hover:bg-gray-600"
+                  : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+              }`}
             >
               Back to Summary
             </button>
             <button
               onClick={resetApp}
-              className="px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl hover:from-indigo-700 hover:to-purple-700 transition-all font-medium"
+              className={`px-6 py-3 rounded-xl transition-all font-medium transition-colors duration-300 ${
+                theme === "dark"
+                  ? "bg-gradient-to-r from-indigo-500 to-purple-500 text-white hover:from-indigo-600 hover:to-purple-600"
+                  : "bg-gradient-to-r from-indigo-600 to-purple-600 text-white hover:from-indigo-700 hover:to-purple-700"
+              }`}
             >
               Start New Book
             </button>
@@ -383,29 +470,53 @@ export default function Summaries() {
       )}
 
       {isLoading && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-6 flex items-center gap-4">
-            <div className="animate-spin w-6 h-6 border-2 border-blue-600 border-t-transparent rounded-full"></div>
+        <div className={`fixed inset-0 flex items-center justify-center z-50 transition-colors duration-300 ${
+          theme === "dark" ? "bg-black/70" : "bg-black/50"
+        }`}>
+          <div className={`rounded-lg p-6 flex items-center gap-4 transition-colors duration-300 ${
+            theme === "dark" ? "bg-gray-800 text-gray-200" : "bg-white text-gray-800"
+          }`}>
+            <div className={`animate-spin w-6 h-6 border-2 rounded-full transition-colors duration-300 ${
+              theme === "dark" ? "border-indigo-400 border-t-transparent" : "border-blue-600 border-t-transparent"
+            }`}></div>
             <span>Loading {currentStep}...</span>
           </div>
         </div>
       )}
 
       {error && (
-        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mt-4">
+        <div className={`border px-4 py-3 rounded mt-4 transition-colors duration-300 ${
+          theme === "dark"
+            ? "bg-red-900/80 border-red-700 text-red-200"
+            : "bg-red-100 border-red-400 text-red-700"
+        }`}>
           <p>{error}</p>
-          <button onClick={() => setError(null)} className="text-red-600 hover:underline mt-2">
+          <button
+            onClick={() => setError(null)}
+            className={`mt-2 inline-block hover:underline transition-colors duration-300 ${
+              theme === "dark" ? "text-red-400 hover:text-red-300" : "text-red-600 hover:text-red-500"
+            }`}
+          >
             Dismiss
           </button>
         </div>
       )}
 
       {warnings.length > 0 && (
-        <div className="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded mt-4">
+        <div className={`border px-4 py-3 rounded mt-4 transition-colors duration-300 ${
+          theme === "dark"
+            ? "bg-yellow-900/80 border-yellow-700 text-yellow-200"
+            : "bg-yellow-100 border-yellow-400 text-yellow-700"
+        }`}>
           {warnings.map((warning, index) => (
             <p key={index}>{warning}</p>
           ))}
-          <button onClick={() => setWarnings([])} className="text-yellow-600 hover:underline mt-2">
+          <button
+            onClick={() => setWarnings([])}
+            className={`mt-2 inline-block hover:underline transition-colors duration-300 ${
+              theme === "dark" ? "text-yellow-400 hover:text-yellow-300" : "text-yellow-600 hover:text-yellow-500"
+            }`}
+          >
             Dismiss
           </button>
         </div>
