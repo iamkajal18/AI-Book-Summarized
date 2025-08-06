@@ -17,7 +17,7 @@ export default function Page() {
   return (
     <>
   
-    <HeroSection/>
+    <HeroSection theme="light"/>
    <DiscussionPanel/>
       <AnimatedBookSummaries/>
       <AllBlogs/>

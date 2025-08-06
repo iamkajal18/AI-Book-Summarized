@@ -1,14 +1,8 @@
 import { NextRequest } from "next/server";
 import axios from "axios";
 
-type Context = {
-  params: {
-    id: string;
-  };
-};
-
-export async function GET(req: NextRequest, context: Context) {
-  const videoId = context.params.id;
+export async function GET(req: NextRequest, context: any) {
+  const videoId = context?.params?.id;
 
   if (!videoId) {
     return new Response(JSON.stringify({ error: "Video ID is required" }), {

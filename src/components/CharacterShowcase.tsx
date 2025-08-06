@@ -1,4 +1,5 @@
-import { CharacterDef } from "./AnimatedBookSummaries";
+import type { CharacterDef } from "@/components/AnimatedBookSummaries";
+
 
 interface CharacterShowcaseProps {
   characters: CharacterDef[];

@@ -414,7 +414,6 @@ function DialogueStep({
           },
           {} as Record<string, { traits: string; avatarUrl: string }>
         )}
-        theme={theme}
       />
       
       <div className="flex flex-col sm:flex-row gap-4 mt-8 justify-center">
