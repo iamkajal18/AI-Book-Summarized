@@ -411,7 +411,7 @@ export default function Summaries() {
               ) : (
                 <>
                   <Sparkles className="w-5 h-5" />
-                  Bring Characters to Life!
+                  {/* Bring Characters to Life! */}
                 </>
               )}
             </button>
