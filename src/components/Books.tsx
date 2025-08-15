@@ -250,11 +250,19 @@ export default function Summaries() {
         ? "bg-gradient-to-br from-gray-900/50 to-gray-800/50"
         : "bg-gradient-to-br from-indigo-50 via-white to-purple-50"
     }`}>
-      <h1 className={`text-3xl font-bold mb-6 transition-colors duration-300 ${
-        theme === "dark" ? "text-gray-200" : "text-gray-800"
-      }`}>
-        Book Summaries
-      </h1>
+      <h3 className="text-3xl text-center py-4 md:text-3xl font-bold tracking-tight">
+        <span className="bg-gradient-to-r from-indigo-600  to-blue-700 bg-clip-text text-transparent">
+          Book 
+        </span>{" "}
+        <span className="relative inline-block">
+        Library
+          <span
+            className={`absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-400 to-blue-500 rounded-full ${
+              theme === "dark" ? "opacity-90" : "opacity-100"
+            }`}
+          ></span>
+        </span>
+      </h3>
 
       {currentStep === "input" && (
         <>

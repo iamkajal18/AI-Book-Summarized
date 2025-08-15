@@ -52,9 +52,20 @@ const Faq = () => {
   return (
     <div className="w-full max-w-5xl mx-auto p-4 bg-gray-50 dark:bg-gray-800">
       <div className="text-center mb-6">
-        <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-4">
-          Frequently Asked Questions
-        </h2>
+        
+        <h3 className="text-3xl text-center py-4 md:text-3xl font-bold tracking-tight">
+        <span className="bg-gradient-to-r from-indigo-600  to-blue-700 bg-clip-text text-transparent">
+          Frequently  Asked
+        </span>{" "}
+        <span className="relative inline-block">
+        Questions
+          <span
+            className={`absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-400 to-blue-500 rounded-full ${
+              theme === "dark" ? "opacity-90" : "opacity-100"
+            }`}
+          ></span>
+        </span>
+      </h3>
         <p className="text-gray-600 dark:text-gray-400 text-xs">
           Discover how SmartBriefs transforms your reading experience.
         </p>
