@@ -16,9 +16,7 @@ import {
   Home,
   BookOpen,
   Bookmark,
-  Video,
-  MessageSquare,
-  BarChart,
+  Mic
 } from "lucide-react";
 
 interface NavItemProps {
@@ -57,6 +55,7 @@ const NavItem: React.FC<NavItemProps> = ({
  const menuItems = [
     { href: "/", icon: <Home size={18} />, label: "Home" },
     { href: "/summaries", icon: <BookOpen size={18} />, label: " Some Book Summaries" },
+      { href: "https://live-audio-seven.vercel.app/", icon: <Mic size={18} />, label: " Live-Audio Talking" },
     { href: "/summarizebook", icon: <Bookmark size={18} />, label: "Any Book Summary" },
 
   ];
